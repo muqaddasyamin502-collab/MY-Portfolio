@@ -1,0 +1,118 @@
+/* Curated certificate gallery */
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))!important;
+    gap: 1.45rem!important;
+    perspective: 1200px
+}
+
+.cert-card {
+    overflow: hidden;
+    background: #fffaf5!important;
+    border: 1px solid #ead8ca!important;
+    border-radius: 18px!important;
+    box-shadow: 0 14px 30px rgba(58, 37, 25, .08)!important;
+    transform-style: preserve-3d;
+    transition: transform .35s ease, box-shadow .35s ease!important;
+    animation: none!important
+}
+
+.cert-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-1deg)!important;
+    box-shadow: 0 25px 45px rgba(58, 37, 25, .15)!important
+}
+
+.cert-preview-link {
+    display: flex;
+    height: 230px;
+    background: #f3eee8;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+}
+
+.cert-preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform .35s ease
+}
+
+.cert-preview-link:hover .cert-preview-image {
+    transform: scale(1.035)
+}
+
+.cert-content {
+    padding: 1.4rem 1.5rem 1.55rem!important
+}
+
+.cert-content h3 {
+    color: #3d2b22!important;
+    font-family: 'DM Sans', sans-serif!important;
+    font-size: 1.22rem!important;
+    line-height: 1.25
+}
+
+.cert-content p {
+    color: #806d61!important
+}
+
+.cert-badge {
+    background: #f1dfd1!important;
+    color: #9f604a!important;
+    padding: 5px 10px!important;
+    font-size: .71rem!important
+}
+
+.credential-actions {
+    margin-top: 1rem
+}
+
+.credential-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #9f604a!important;
+    text-decoration: none;
+    font-weight: 700
+}
+
+.credential-link:hover {
+    color: #553124!important
+}
+
+.certificate-toggle-wrap {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2.2rem
+}
+
+.show-more-certificates {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    padding: 13px 18px;
+    border: 1px solid #34231c;
+    border-radius: 10px;
+    background: #34231c;
+    color: #fff8f0;
+    font: 600 .9rem 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease
+}
+
+.show-more-certificates:hover {
+    background: #a7664d;
+    border-color: #a7664d;
+    transform: translateY(-2px)
+}
+
+.show-more-certificates[aria-expanded="true"] i {
+    transform: rotate(180deg)
+}
+
+.show-more-certificates i {
+    transition: transform .2s ease
+}
