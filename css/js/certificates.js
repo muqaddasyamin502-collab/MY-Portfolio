@@ -41,8 +41,11 @@ function renderCertificates() {
     const visibleCertificates = displayingAllCertificates ? certificateItems : certificateItems.filter((item) => featuredCertificateTitles.has(item.title));
     grid.innerHTML = visibleCertificates.map((item) => {
         const localFile = item.file && item.file.endsWith('.pdf') ? `assets/certificates/${encodeURIComponent(item.file)}` : `assets/certificate-previews/${item.preview}`;
-        const actionUrl = item.verify || localFile;
-        return `<article class="cert-card fade-in visible"><a class="cert-preview-link" href="${localFile}" target="_blank" rel="noopener" aria-label="View ${item.title} certificate preview"><img class="cert-preview-image" src="assets/certificate-previews/${item.preview}" alt="${item.title} certificate preview" loading="lazy"></a><div class="cert-content"><span class="cert-badge">${item.type}</span><h3>${item.title}</h3><p>Issued by ${item.issuer}.</p><div class="credential-actions"><a class="credential-link" target="_blank" rel="noopener" href="${actionUrl}">Verify credential <i class="fas fa-arrow-up-right-from-square"></i></a></div></div></article>`;
+        const previewDownload = item.file && item.file.endsWith('.pdf') ? 'download' : '';
+        const credentialAction = item.verify ?
+            `<a class="credential-link" target="_blank" rel="noopener" href="${item.verify}">Verify credential <i class="fas fa-arrow-up-right-from-square"></i></a>` :
+            `<a class="credential-link" href="${localFile}" ${previewDownload}>Download certificate <i class="fas fa-download"></i></a>`;
+        return `<article class="cert-card fade-in visible"><a class="cert-preview-link" href="${localFile}" ${previewDownload} aria-label="Download ${item.title} certificate"><img class="cert-preview-image" src="assets/certificate-previews/${item.preview}" alt="${item.title} certificate preview" loading="lazy"></a><div class="cert-content"><span class="cert-badge">${item.type}</span><h3>${item.title}</h3><p>Issued by ${item.issuer}.</p><div class="credential-actions">${credentialAction}</div></div></article>`;
     }).join('');
     if (showMoreButton) {
         showMoreButton.textContent = displayingAllCertificates ? 'Show featured credentials' : `Show ${certificateItems.length - visibleCertificates.length} more credentials`;
