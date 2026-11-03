@@ -2807,6 +2807,29 @@
             }, 3000);
         });
 
+        // Force the CV to download instead of opening a browser PDF tab.
+        const downloadCV = document.getElementById('downloadCV');
+        if (downloadCV) {
+            downloadCV.addEventListener('click', async function(event) {
+                event.preventDefault();
+                try {
+                    const response = await fetch(this.href);
+                    if (!response.ok) throw new Error('CV unavailable');
+                    const file = await response.blob();
+                    const temporaryUrl = URL.createObjectURL(file);
+                    const downloader = document.createElement('a');
+                    downloader.href = temporaryUrl;
+                    downloader.download = 'Muqaddas_Yamin_Resume.pdf';
+                    document.body.appendChild(downloader);
+                    downloader.click();
+                    downloader.remove();
+                    URL.revokeObjectURL(temporaryUrl);
+                } catch (error) {
+                    window.location.href = this.href;
+                }
+            });
+        }
+
         // Add current year to footer
         document.addEventListener('DOMContentLoaded', function() {
             const yearSpan = document.querySelector('.copyright');
